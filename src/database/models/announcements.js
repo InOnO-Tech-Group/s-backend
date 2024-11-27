@@ -4,20 +4,20 @@ const announcementSchema = new mongoose.Schema(
   {
     content: {
       type: String,
-      require: true,
+      required: true,
     },
     dueDate: {
       type: String,
-      require: true,
+      required: true,
     },
     author: {
       type: ObjectId,
       ref: "users",
-      require: true,
+      required: true,
     },
     status: {
       type: String,
-      require: true,
+      required: true,
     },
   },
   {

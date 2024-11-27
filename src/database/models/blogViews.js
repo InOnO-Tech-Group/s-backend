@@ -5,8 +5,8 @@ const blogViewsSchema = new mongoose.Schema(
   {
     blog: {
       type: ObjectId,
-      ref:"blogs",
-      require: true,
+      ref: "blogs",
+      required: true,
     },
   },
   { timestamps: true }

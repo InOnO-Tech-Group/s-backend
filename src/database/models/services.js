@@ -4,11 +4,11 @@ const serviceSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      require: true,
+      required: true,
     },
     description: {
-        type: String,
-      require: true,
+      type: String,
+      required: true,
     },
   },
   { timestamps: true }

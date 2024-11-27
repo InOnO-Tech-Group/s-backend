@@ -5,28 +5,29 @@ const blogSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      require: true,
+      required: true,
     },
     service: {
       type: ObjectId,
       ref: "services",
-      require: true,
+      required: true,
     },
     coverImage: {
       type: String,
-      require: true,
+      required: true,
     },
     description: {
       type: String,
-      require: true,
+      required: true,
     },
     author: {
       type: ObjectId,
       ref: "users",
+      required: true
     },
-    Password: {
+    password: {
       type: String,
-      require: true,
+      required: true,
     },
   },
   { timestamps: true }

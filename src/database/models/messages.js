@@ -4,28 +4,28 @@ const messageSchema = new mongoose.Schema(
   {
     names: {
       type: String,
-      require: true,
+      required: true,
     },
     phone: {
       type: String,
-      require: true,
+      required: true,
     },
     email: {
       type: String,
-      require: true,
+      required: true,
     },
     content: {
       type: String,
-      require: true,
+      required: true,
     },
     isReead: {
       type: Boolean,
-      require: true
+      required: true
     },
   },
   { timestamps: true }
 );
 
-const message = mongoose.model("users", messageSchema);
+const message = mongoose.model("messages", messageSchema);
 
 export default message;
