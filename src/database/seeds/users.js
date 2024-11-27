@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import { hashPassword } from "../../helpers/authHelpers.js";
 import User from "../models/users.js";
 
