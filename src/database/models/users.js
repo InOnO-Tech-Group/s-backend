@@ -12,7 +12,6 @@ const userSchema = new mongoose.Schema(
     },
     profile: {
       type: String,
-      required: true,
     },
     email: {
       type: String,
@@ -34,6 +33,6 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-const user = mongoose.model("users", userSchema);
+const User = mongoose.model("users", userSchema);
 
-export default user;
+export default User;
