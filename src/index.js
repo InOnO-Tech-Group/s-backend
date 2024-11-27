@@ -5,7 +5,6 @@ import morgan from "morgan"
 
 import dbConnection from "./database/config/config.js"
 import router from "./routes/index.js"
-
 dotenv.config()
 
 const app = express()
