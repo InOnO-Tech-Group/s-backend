@@ -1,3 +1,31 @@
+import User from "../../../database/models/users";
+import Session from "../../../database/models/sessions";
+const findUserByEmail = (email) => {
+  return User.findOne({ email });
+};
+const saveSession = (sessionData) => {
+  return Session.create(sessionData);
+};
+const deleteSession = (userId) => {
+  return Session.destroy({ where: { userId } });
+};
+const getUserOTP = (otp) => {
+  return Session.findOne({ content: otp });
+};
+const updateUserSession = (userId, content) => {
+  return Session.findOneAndUpdate(
+    { userId },
+    { content: content },
+    { new: true, upsert: false }
+  );
+};
+export default {
+  findUserByEmail,
+  saveSession,
+  deleteSession,
+  getUserOTP,
+  updateUserSession,
+};
 import Session from "../../../database/models/sessions.js";
 import User from "../../../database/models/users.js";
 

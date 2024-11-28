@@ -1,4 +1,47 @@
-import { generateOTP, hashPassword } from "../../../helpers/authHelpers.js";
+import httpStatus from "http-status";
+import { generateOTP, generateToken } from "../../../helpers/authHelpers";
+import authRepository from "../repository/authRepository";
+const sendLoginOTP = async (req, res) => {
+  try {
+    const otp = generateOTP(req.user._id);
+    await authRepository.saveSession({
+      userId: req.user._id,
+      content: otp,
+    });
+    await sendEmail(
+      req.user.email,
+      "ES Gishoma Authentication OTP",
+      `Dear ${req.user.firstName}, Here is your OTP: ${otp} `
+    );
+    return res.status(httpStatus.OK).json({
+      status: httpStatus.OK,
+      message: "Verify Login With OTP Sent On Email",
+    });
+  } catch (error) {
+    return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+      status: httpStatus.INTERNAL_SERVER_ERROR,
+      message: error.message,
+    });
+  }
+};
+const userLoginVerify = async (req, res) => {
+    try {
+        const token = generateToken(req.user._id);
+        const session = await authRepository.updateUserSession(req.userId, token);
+        return res.status(httpStatus.OK).json({
+            status: httpStatus.OK,
+            message: "Logged in successfully .",
+            data: { session: session },
+        });
+    } catch (error) {
+        return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+            status: httpStatus.INTERNAL_SERVER_ERROR,
+            message: error.message,
+        });
+    }
+};
+
+export default {sendLoginOTP,userLoginVerify}import { generateOTP, hashPassword } from "../../../helpers/authHelpers.js";
 import { sendEmail } from "../../../services/sendEmail.js";
 import authRepository from "../repository/authRepository.js";
 
