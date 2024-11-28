@@ -96,7 +96,7 @@ const sendEmail = async (email, subject, content, title, user, retries = 3) => {
                             </div>
 
                             <div class="content">
-                                    <p><strong>Dear ${user}</strong></p>
+                                    <p><strong>Dear ${user},</strong></p>
                                 <p>
                             ${content}
                             </p>
