@@ -2,9 +2,6 @@ import authRepository from "../modules/auth/repository/authRepository.js"
 export const isUserExistsByEmail = async (req, res, next) => {
     try {
         const user = await authRepository.findUserByAttribute("email", req.body.email);
-        console.log(user)
-        console.log("SSSS");
-        
         if (!user) {
             return res.status(404).json({
                 status: 404,
