@@ -1,6 +1,6 @@
 import httpStatus from "http-status";
-import { generateOTP, generateToken } from "../../../helpers/authHelpers";
-import authRepository from "../repository/authRepository";
+import { generateOTP, generateToken } from "../../../helpers/authHelpers.js";
+import authRepository from "../repository/authRepository.js";
 const sendLoginOTP = async (req, res) => {
   try {
     const otp = generateOTP(req.user._id);

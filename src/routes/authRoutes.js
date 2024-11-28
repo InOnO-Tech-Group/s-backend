@@ -12,8 +12,10 @@ import {
 } from "../modules/auth/validation/authValidation.js";
 import validation from "../middlewares/validations.js";
 import authController from "../modules/auth/controller/authController.js";
-import { isOTPValid, isPassworValid, isUserExistByEmail } from "../middlewares/authMiddleware";
-import authController from "../modules/auth/controller/authController";
+import { isOTPValid, isPassworValid, isUserExistByEmail } from "../middlewares/authMiddleware.js";
+import authController from "../modules/auth/controller/authController.js";
+import { bodyValidation } from "../middlewares/validationMiddleware.js";
+import { loginSchema, verifyLoginSchema } from "../modules/auth/validation/authValidation.js";
 
 const authRoute = express.Router()
 authRoute.post("/send-login-otp",isUserExistByEmail,isPassworValid,authController.sendLoginOTP)

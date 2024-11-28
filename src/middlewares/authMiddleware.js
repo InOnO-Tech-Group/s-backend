@@ -1,5 +1,5 @@
-import { comparePassword, generateOTP } from "../helpers/authHelpers";
-import authRepository from "../modules/auth/repository/authRepository";
+import { comparePassword} from "../helpers/authHelpers.js";
+import authRepository from "../modules/auth/repository/authRepository.js";
 import httpStatus from "http-status";
 
 export const isUserExistByEmail = async (req, res, next) => {
