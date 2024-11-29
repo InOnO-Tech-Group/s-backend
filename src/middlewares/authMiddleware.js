@@ -43,8 +43,8 @@ export const isOTPValid = async (req, res, next) => {
     try {
         const session = await authRepository.findSessionBy2Attributes("userId", req.body.userId, "content", req.body.OTP);
         if (!session) {
-            return res.status(404).json({
-                status: 404,
+            return res.status(400).json({
+                status: 400,
                 message: "Invalid OTP!"
             });
         }

@@ -36,6 +36,21 @@ const forgotPassword = async (req, res) => {
     }
 };
 
+const otpValidation = async (req, res) => {
+    try {
+        return res.status(200).json({
+            status: 200,
+            message: "OTP is Valid"
+        })
+    } catch (error) {
+        res.status(500).json({
+            status: 500,
+            message: "An error occurred while processing your request.",
+            error: error.message
+        });
+    }
+}
+
 const resetPassword = async (req, res) => {
     try {
         const userName = req.user.firstName || req.user.email.split("@")[0];
@@ -68,5 +83,6 @@ const resetPassword = async (req, res) => {
 
 export default {
     forgotPassword,
-    resetPassword
+    otpValidation,
+    resetPassword,
 };

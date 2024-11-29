@@ -5,13 +5,7 @@ export const hashPassword = async (password) => {
 }
 
 export const generateOTP = async () => {
-    const currentTime = Date.now();
+    const otp = Math.floor(Math.random() * 900000) + 100000;
 
-    const randomNum = Math.floor(Math.random() * 100000);
-
-    const combined = `${currentTime}${randomNum}`;
-
-    const code = parseInt(combined.slice(-6));
-
-    return code;
+    return otp.toString();
 }

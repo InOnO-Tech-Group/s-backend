@@ -13,6 +13,7 @@ const validation =
                 }
                 return next();
             } catch (error) {
+                console.log(error)
                 res
                     .status(400)
                     .json({ status: 400, message: error.message });
