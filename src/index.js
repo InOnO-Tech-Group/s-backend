@@ -18,4 +18,10 @@ app.use("/api/v1/", router);
 
 const port = process.env.PORT
 
-app.listen(port, () => console.log(`App running on on PORT ${port}`))
+dbConnection()
+    .then(() => {
+        app.listen(port, () => console.log(`App running on PORT ${port}`));
+    })
+    .catch((error) => {
+        console.error('Error connecting to the database:', error);
+    });

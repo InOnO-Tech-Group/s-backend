@@ -19,6 +19,14 @@ const seedUsers = async () => {
             phone: "0788888888",
             password: await hashPassword("password123"),
         },
+        {
+            firstName: "Ndahimana",
+            lastName: "Bopheur",
+            username: "nd154",
+            email: "ndahimana154@gmail.com",
+            phone: "0788923011",
+            password: await hashPassword("password123"),
+        },
     ];
     await User.deleteMany();
     await User.insertMany(users);
