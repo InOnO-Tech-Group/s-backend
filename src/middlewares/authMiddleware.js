@@ -3,7 +3,7 @@ import authRepository from "../modules/auth/repository/authRepository.js";
 import httpStatus from "http-status";
 
 export const isUserExistByEmail = async (req, res, next) => {
-  console.log("accessed");
+  console.log("accessed",req.body);
   const { email } = req.body;
   const user = await authRepository.findUserByEmail(email);
 

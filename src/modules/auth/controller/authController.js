@@ -42,7 +42,7 @@ const userLoginVerify = async (req, res) => {
     }
 };
 
-export default {sendLoginOTP,userLoginVerify}import { generateOTP, hashPassword } from "../../../helpers/authHelpers.js";
+export default {sendLoginOTP, userLoginVerify}import { generateOTP, hashPassword } from "../../../helpers/authHelpers.js";
 import { sendEmail } from "../../../services/sendEmail.js";
 import authRepository from "../repository/authRepository.js";
 
