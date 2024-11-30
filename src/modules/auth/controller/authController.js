@@ -1,6 +1,7 @@
 import httpStatus from "http-status";
-import { generateOTP, generateToken } from "../../../helpers/authHelpers.js";
+import { generateOTP, generateToken , hashPassword} from "../../../helpers/authHelpers.js";
 import authRepository from "../repository/authRepository.js";
+
 import { sendEmail } from "../../../services/sendEmail.js";
 const sendLoginOTP = async (req, res) => {
   try {
@@ -42,9 +43,7 @@ const userLoginVerify = async (req, res) => {
     }
 };
 
-export default {sendLoginOTP, userLoginVerify}import { generateOTP, hashPassword } from "../../../helpers/authHelpers.js";
-import { sendEmail } from "../../../services/sendEmail.js";
-import authRepository from "../repository/authRepository.js";
+
 
 const forgotPassword = async (req, res) => {
     try {
@@ -129,4 +128,5 @@ export default {
     forgotPassword,
     otpValidation,
     resetPassword,
-};
+    sendLoginOTP,
+    userLoginVerify}

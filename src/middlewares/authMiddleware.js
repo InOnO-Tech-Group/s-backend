@@ -3,7 +3,6 @@ import authRepository from "../modules/auth/repository/authRepository.js";
 import httpStatus from "http-status";
 
 export const isUserExistByEmail = async (req, res, next) => {
-  console.log("accessed",req.body);
   const { email } = req.body;
   const user = await authRepository.findUserByEmail(email);
 
@@ -29,7 +28,7 @@ export const isPassworValid = async (req, res, next) => {
 
   return next();
 };
-export const isOTPValid = async (req, res, next) => {
+export const isOTPValidy = async (req, res, next) => {
   const { otp } = req.body;
   const session = await authRepository.getUserOTP(otp);
   if (!session) {
@@ -40,7 +39,6 @@ export const isOTPValid = async (req, res, next) => {
   req.userId = session.userId;
   return next();
 };
-import authRepository from "../modules/auth/repository/authRepository.js"
 export const isUserExistsByEmail = async (req, res, next) => {
     try {
         const user = await authRepository.findUserByAttribute("email", req.body.email);

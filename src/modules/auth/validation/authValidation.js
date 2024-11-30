@@ -8,7 +8,6 @@ export const loginSchema = Joi.object({
 export const verifyLoginSchema = Joi.object({
     otp: Joi.string().required(),
 });
-import Joi from "joi";
 
 export const forgotPasswordSchema = Joi.object({
     email: Joi.string().required().messages({
