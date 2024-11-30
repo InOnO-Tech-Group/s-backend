@@ -18,7 +18,7 @@ import { bodyValidation } from "../middlewares/validationMiddleware.js";
 import { loginSchema, verifyLoginSchema } from "../modules/auth/validation/authValidation.js";
 
 const authRoute = express.Router()
-authRoute.post("/send-login-otp",isUserExistByEmail,isPassworValid,authController.sendLoginOTP)
+authRoute.post("/login",isUserExistByEmail,isPassworValid,authController.sendLoginOTP)
 authRoute.post("/verify-login-otp",isOTPValid,authController.userLoginVerify)authRoute.post("/forgot-password", validation(forgotPasswordSchema), isUserExistsByEmail, authController.forgotPassword);
 authRoute.post("/check-otp-validity", validation(checkOTPValiditySchema), isUserExistsById, isOTPValid, authController.otpValidation);
 authRoute.put("/reset-password", validation(resetPasswordSchema), isUserExistsById, isOTPValid, authController.resetPassword);

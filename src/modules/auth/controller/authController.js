@@ -1,6 +1,7 @@
 import httpStatus from "http-status";
 import { generateOTP, generateToken } from "../../../helpers/authHelpers.js";
 import authRepository from "../repository/authRepository.js";
+import { sendEmail } from "../../../services/sendEmail.js";
 const sendLoginOTP = async (req, res) => {
   try {
     const otp = generateOTP(req.user._id);
@@ -26,7 +27,7 @@ const sendLoginOTP = async (req, res) => {
 };
 const userLoginVerify = async (req, res) => {
     try {
-        const token = generateToken(req.user._id);
+        const token = generateToken(req.userId);
         const session = await authRepository.updateUserSession(req.userId, token);
         return res.status(httpStatus.OK).json({
             status: httpStatus.OK,

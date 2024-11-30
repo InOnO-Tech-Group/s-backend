@@ -1,8 +1,9 @@
-import { comparePassword} from "../helpers/authHelpers.js";
+import { comparePassword } from "../helpers/authHelpers.js";
 import authRepository from "../modules/auth/repository/authRepository.js";
 import httpStatus from "http-status";
 
 export const isUserExistByEmail = async (req, res, next) => {
+  console.log("accessed");
   const { email } = req.body;
   const user = await authRepository.findUserByEmail(email);
 
@@ -28,8 +29,8 @@ export const isPassworValid = async (req, res, next) => {
 
   return next();
 };
-export const isOTPValid = async () => {
-  const {otp} = req.body
+export const isOTPValid = async (req, res, next) => {
+  const { otp } = req.body;
   const session = await authRepository.getUserOTP(otp);
   if (!session) {
     return res

@@ -10,6 +10,7 @@ export const comparePassword = async (password, userPassword) => {
     return await bcrypt.compare(password, userPassword);
   };
   export const generateOTP = (id) => {
+    let counter = 0;
     const currentTime = new Date().getTime().toString();
     counter = (counter + 1) % 1000000;
     const counterPart = counter.toString().padStart(6, '0');
