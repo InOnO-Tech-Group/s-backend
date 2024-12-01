@@ -2,21 +2,6 @@ import { comparePassword } from "../helpers/authHelpers.js";
 import authRepository from "../modules/auth/repository/authRepository.js";
 import httpStatus from "http-status";
 
-export const isUserExistByEmail = async (req, res, next) => {
-  const { email } = req.body;
-  const user = await authRepository.findUserByEmail(email);
-
-  if (!user) {
-    return res.status(httpStatus.NOT_FOUND).json({
-      status: httpStatus.NOT_FOUND,
-      message: "Incorect email Used!",
-    });
-  }
-  req.user = user;
-
-  return next();
-};
-
 export const isPassworValid = async (req, res, next) => {
   const { password } = req.body;
   const userPassword = req.user.password;
@@ -28,17 +13,7 @@ export const isPassworValid = async (req, res, next) => {
 
   return next();
 };
-export const isOTPValidy = async (req, res, next) => {
-  const { otp } = req.body;
-  const session = await authRepository.getUserOTP(otp);
-  if (!session) {
-    return res
-      .status(httpStatus.BAD_REQUEST)
-      .json({ status: httpStatus.BAD_REQUEST, message: "Invalid User OTP!" });
-  }
-  req.userId = session.userId;
-  return next();
-};
+
 export const isUserExistsByEmail = async (req, res, next) => {
     try {
         const user = await authRepository.findUserByAttribute("email", req.body.email);

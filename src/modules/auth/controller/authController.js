@@ -1,39 +1,30 @@
 import httpStatus from "http-status";
-import { generateOTP, generateToken , hashPassword} from "../../../helpers/authHelpers.js";
+import { generateOTP, generateToken, hashPassword } from "../../../helpers/authHelpers.js";
 import authRepository from "../repository/authRepository.js";
-
 import { sendEmail } from "../../../services/sendEmail.js";
+
 const sendLoginOTP = async (req, res) => {
-  try {
-    const otp = generateOTP(req.user._id);
-    await authRepository.saveSession({
-      userId: req.user._id,
-      content: otp,
-    });
-    await sendEmail(
-      req.user.email,
-      "ES Gishoma Authentication OTP",
-      `Dear ${req.user.firstName}, Here is your OTP: ${otp} `
-    );
-    return res.status(httpStatus.OK).json({
-      status: httpStatus.OK,
-      message: "Verify Login With OTP Sent On Email",
-    });
-  } catch (error) {
-    return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-      status: httpStatus.INTERNAL_SERVER_ERROR,
-      message: error.message,
-    });
-  }
-};
-const userLoginVerify = async (req, res) => {
     try {
-        const token = generateToken(req.userId);
-        const session = await authRepository.updateUserSession(req.userId, token);
+        const userName = req.user.firstName || req.user.email.split("@")[0];
+
+        const otp = await generateOTP(req.user._id);
+        const session = await authRepository.saveSession({
+            userId: req.user._id,
+            content: otp,
+        });
+        await sendEmail(
+            req.user.email,
+            "Login OTP - ES Gishoma",
+            `A new login was detected on your account and here is your OTP: <b>${otp}</b>.
+                Please don't share with anyone.
+            </p>`,
+            "New login detected on your account",
+            userName
+        );
         return res.status(httpStatus.OK).json({
             status: httpStatus.OK,
-            message: "Logged in successfully .",
-            data: { session: session },
+            message: "Verify Login with OTP sent on your email",
+            session
         });
     } catch (error) {
         return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
@@ -43,11 +34,35 @@ const userLoginVerify = async (req, res) => {
     }
 };
 
+const userLoginVerify = async (req, res) => {
+    try {
+        const userId = req.session.userId
+        const token = await generateToken(userId);
 
+        await authRepository.deleteSession(req.session._id);
+
+        const session = await authRepository.saveSession({
+            userId: userId,
+            content: token,
+        })
+
+        return res.status(httpStatus.OK).json({
+            status: httpStatus.OK,
+            message: "Logged in successfully .",
+            session
+        });
+
+    } catch (error) {
+        return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+            status: httpStatus.INTERNAL_SERVER_ERROR,
+            message: error.message,
+        });
+    }
+};
 
 const forgotPassword = async (req, res) => {
     try {
-        const OTP = await generateOTP();
+        const OTP = await generateOTP(req.user._id);
         const session = await authRepository.saveSession({
             userId: req.user._id,
             content: OTP,
@@ -106,7 +121,7 @@ const resetPassword = async (req, res) => {
             req.user.email,
             "Password changed successfully",
             `<p>Your password is changed successfully, feel free to change it again in the case you forget it.`,
-            "Password change completed",
+            "Password changed completely",
             userName
         );
 
@@ -129,4 +144,5 @@ export default {
     otpValidation,
     resetPassword,
     sendLoginOTP,
-    userLoginVerify}
+    userLoginVerify
+}

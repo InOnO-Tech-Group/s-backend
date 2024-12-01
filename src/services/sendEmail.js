@@ -109,6 +109,7 @@ const sendEmail = async (email, subject, content, title, user, retries = 3) => {
                                 </div>
                                 <p>Contact us: <a href="mailto:support@example.com">info@esgishoma.rw</a> | Phone: +1234567890</p>
                                 <p>Address: 123 Example Street, Rusizi, Rwanda</p>
+                                <p>If you have received this email by a mistake kindly ignore it.</p>
                                 <p>&copy; 2024 ES Gishoma. All rights reserved.</p>
                             </div>
                         </div>
