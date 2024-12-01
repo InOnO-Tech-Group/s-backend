@@ -1,4 +1,19 @@
-import authRepository from "../modules/auth/repository/authRepository.js"
+import { comparePassword } from "../helpers/authHelpers.js";
+import authRepository from "../modules/auth/repository/authRepository.js";
+import httpStatus from "http-status";
+
+export const isPassworValid = async (req, res, next) => {
+  const { password } = req.body;
+  const userPassword = req.user.password;
+  if (!(await comparePassword(password, userPassword))) {
+    return res
+      .status(httpStatus.BAD_REQUEST)
+      .json({ status: httpStatus.BAD_REQUEST, message: "Incorect password!" });
+  }
+
+  return next();
+};
+
 export const isUserExistsByEmail = async (req, res, next) => {
     try {
         const user = await authRepository.findUserByAttribute("email", req.body.email);

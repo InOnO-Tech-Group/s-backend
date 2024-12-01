@@ -4,10 +4,10 @@ import User from "../models/users.js";
 const seedUsers = async () => {
     const users = [
         {
-            firstName: "John",
-            lastName: "Doe",
-            username: "john1",
-            email: "john@example.com",
+            firstName: "Jean Pierre",
+            lastName: "AKIMANA",
+            username: "AKIMANA",
+            email: "akimana.inono@gmail.com",
             phone: "0788888887",
             password: await hashPassword("password123"),
         },
