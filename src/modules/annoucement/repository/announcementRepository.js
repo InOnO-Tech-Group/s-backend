@@ -10,4 +10,7 @@ const updateAnnouncement = async (id, anncouncementData) => {
     new: true,
   });
 };
-export default { createAnnouncement ,updateAnnouncement,findAnnouncementById};
+const deleteAnnouncement = async (id, anncouncementData) => {
+    return await Anncouncemnt.findByIdAndDelete(id);
+  };
+export default { createAnnouncement ,updateAnnouncement,findAnnouncementById,deleteAnnouncement};
