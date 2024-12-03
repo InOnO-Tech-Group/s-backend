@@ -35,7 +35,3 @@ export const generateToken = async (id) => {
     expiresIn: process.env.JWT_EXPIRE,
   });
 };
-
-export const decodeToken = async (token) => {
-  return await jwt.verify(token, process.env.JWT_SECRET)
-};

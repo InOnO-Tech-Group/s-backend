@@ -18,7 +18,6 @@ const announcementSchema = new mongoose.Schema(
     status: {
       type: String,
       required: true,
-      default: "published"
     },
   },
   {
