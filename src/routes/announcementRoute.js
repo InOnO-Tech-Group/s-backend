@@ -6,6 +6,7 @@ import announcementController from "../modules/annoucement/controller/announceme
 import { doesAnnouncementExist } from "../middlewares/announcementMiddleware.js";
 const announcementRoute = express.Router();
 announcementRoute.post("/new", isUserAuthorized,bodyValidation(newAnnouncementSchema), announcementController.createNewAnnouncement);
-announcementRoute.post("/update/:announcemntId", isUserAuthorized,doesAnnouncementExist,bodyValidation(updateAnnouncementSchema), announcementController.updateAnnouncement);
+announcementRoute.put("/update/:announcemntId", isUserAuthorized,doesAnnouncementExist,bodyValidation(updateAnnouncementSchema), announcementController.updateAnnouncement);
+announcementRoute.get("/view/:announcemntId", isUserAuthorized,doesAnnouncementExist, announcementController.viewSingleAnnouncement);
 
 export default announcementRoute;
