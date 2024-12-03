@@ -17,14 +17,24 @@ const updateUserSession = (userId, content) => {
   );
 };
 
+const findUserById = async (userId) => {
+  return await User.findById(userId);
+}
+const findOneUser = async () => {
+  return await User.findOne();
+}
 const findUserByAttribute = async (key, value) => {
   const user = await User.findOne({ [key]: value });
   return user;
 }
 
+
 const findSessionBy2Attributes = async (key1, value1, key2, value2) => {
   const session = await Session.findOne({ [key1]: value1, [key2]: value2 });
   return session;
+}
+const findSessionByToken = async (token)=>{
+  return Session.findOne({content:token})
 }
 
 const updateUser = async (_id, data) => {
@@ -39,10 +49,13 @@ export default {
   findUserByAttribute,
   saveSession,
   findSessionBy2Attributes,
+  findUserById,
   updateUser,
   deleteSession,
   saveSession,
   deleteSession,
   getUserOTP,
   updateUserSession,
+  findSessionByToken,
+  findOneUser
 }
