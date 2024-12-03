@@ -11,7 +11,28 @@ const createNewAnnouncement = async (req, res) => {
     return res.status(httpStatus.CREATED).json({
       status: httpStatus.CREATED,
       message: "New announcement added  successfully.",
-      data:anncouncement,
+      data: anncouncement,
+    });
+  } catch (error) {
+    return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+      status: httpStatus.INTERNAL_SERVER_ERROR,
+      message: error.message,
+    });
+  }
+};
+const updateAnnouncement = async (req, res) => {
+  try {
+    const anncouncementData = req.body;
+
+    const anncouncement = await announcementRepository.updateAnnouncement(
+      req.announcement._id,
+      anncouncementData
+    );
+
+    return res.status(httpStatus.OK).json({
+      status: httpStatus.OK,
+      message: "Announcement Updated  successfully.",
+      data: anncouncement,
     });
   } catch (error) {
     return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
@@ -21,4 +42,4 @@ const createNewAnnouncement = async (req, res) => {
   }
 };
 
-export default {createNewAnnouncement}
+export default { createNewAnnouncement,updateAnnouncement };

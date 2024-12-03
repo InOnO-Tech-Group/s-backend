@@ -6,3 +6,9 @@ export const newAnnouncementSchema = Joi.object({
     author:Joi.object().required(),
     status:Joi.string().required()
 });
+export const updateAnnouncementSchema = Joi.object({
+    content: Joi.string(),
+    dueDate: Joi.date(),
+    author:Joi.object(),
+    status:Joi.string()
+});
