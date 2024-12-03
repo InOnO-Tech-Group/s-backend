@@ -7,21 +7,20 @@ import {
 } from "../modules/annoucement/validation/announcementValidation.js";
 import announcementController from "../modules/annoucement/controller/announcementController.js";
 import {
-  doAnyAnnouncementExist,
+  doAnyActiveAnnouncementExist,
+  doAnyAnnouncementsExist,
   doesAnnouncementExist,
+  isAnnouncementAlreadyExistsAndPublished,
 } from "../middlewares/announcementMiddleware.js";
+
 const announcementRoute = express.Router();
-announcementRoute.post(
-  "/new",
-  isUserAuthorized,
-  bodyValidation(newAnnouncementSchema),
-  announcementController.createNewAnnouncement
-);
+
+announcementRoute.post("/new", isUserAuthorized, bodyValidation(newAnnouncementSchema), isAnnouncementAlreadyExistsAndPublished, announcementController.createNewAnnouncement);
 announcementRoute.put(
   "/update/:announcemntId",
   isUserAuthorized,
-  doesAnnouncementExist,
   bodyValidation(updateAnnouncementSchema),
+  doesAnnouncementExist,
   announcementController.updateAnnouncement
 );
 announcementRoute.get(
@@ -30,22 +29,18 @@ announcementRoute.get(
   doesAnnouncementExist,
   announcementController.viewSingleAnnouncement
 );
-announcementRoute.get(
-  "/view",
-  isUserAuthorized,
-  doAnyAnnouncementExist,
-  announcementController.viewAllAnnouncements
-);
+announcementRoute.get("/view", isUserAuthorized, doAnyAnnouncementsExist, announcementController.viewAllAnnouncements);
 announcementRoute.get(
   "/view-active",
-  doAnyAnnouncementExist,
-  announcementController.viewActiveAnnouncements
+  doAnyActiveAnnouncementExist,
+  announcementController.viewAllAnnouncements
 );
+
 announcementRoute.delete(
-  "/delete/:announcemntId",
+  "/delete/:announcementId",
   isUserAuthorized,
   doesAnnouncementExist,
-  announcementController.viewSingleAnnouncement
+  announcementController.deleteAnnouncement
 );
 
 
