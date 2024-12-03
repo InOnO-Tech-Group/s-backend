@@ -55,6 +55,35 @@ const viewSingleAnnouncement = async (req, res) => {
     });
   }
 };
+const viewAllAnnouncements = async (req, res) => {
+    try {
+      return res.status(httpStatus.OK).json({
+        status: httpStatus.OK,
+        message: "Announcements retrieved  successfully.",
+        data: req.anncouncements,
+      });
+    } catch (error) {
+      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+        status: httpStatus.INTERNAL_SERVER_ERROR,
+        message: error.message,
+      });
+    }
+  };
+
+  const viewActiveAnnouncements = async (req, res) => {
+    try {
+      return res.status(httpStatus.OK).json({
+        status: httpStatus.OK,
+        message: "Announcements retrieved  successfully.",
+        data: req.anncouncements,
+      });
+    } catch (error) {
+      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+        status: httpStatus.INTERNAL_SERVER_ERROR,
+        message: error.message,
+      });
+    }
+  };
 
 const deleteAnnouncement = async (req, res) => {
     try {
@@ -76,5 +105,7 @@ export default {
   createNewAnnouncement,
   updateAnnouncement,
   viewSingleAnnouncement,
-  deleteAnnouncement
+  viewAllAnnouncements,
+  deleteAnnouncement,
+  viewActiveAnnouncements
 };
