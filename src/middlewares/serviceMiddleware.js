@@ -27,11 +27,10 @@ export const isServicesExist = async (req, res, next) => {
     if (services || services.length < 1) {
       return res.status(httpStatus.BAD_REQUEST).json({
         status: httpStatus.BAD_REQUEST,
-        message:
-          "No services Found!",
+        message: "Services not found",
       });
     }
-    req.services=services
+    req.services = services;
     return next();
   } catch (error) {
     return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
@@ -40,17 +39,17 @@ export const isServicesExist = async (req, res, next) => {
     });
   }
 };
-export const isServicesExist = async (req, res, next) => {
+export const isServiceExistById = async (req, res, next) => {
+  const { serviceId } = req.params;
   try {
-    const services = await serviceRepository.findAllServices();
-    if (services || services.length < 1) {
+    const service = await serviceRepository.findServiceById(serviceId);
+    if (service) {
       return res.status(httpStatus.BAD_REQUEST).json({
         status: httpStatus.BAD_REQUEST,
-        message:
-          "No services Found!",
+        message: "Service not found!",
       });
     }
-    req.services=services
+    req.service = service;
     return next();
   } catch (error) {
     return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
