@@ -17,14 +17,14 @@ const announcementRoute = express.Router();
 
 announcementRoute.post("/new", isUserAuthorized, bodyValidation(newAnnouncementSchema), isAnnouncementAlreadyExistsAndPublished, announcementController.createNewAnnouncement);
 announcementRoute.put(
-  "/update/:announcemntId",
+  "/update/:announcementId",
   isUserAuthorized,
   bodyValidation(updateAnnouncementSchema),
   doesAnnouncementExist,
   announcementController.updateAnnouncement
 );
 announcementRoute.get(
-  "/view/:announcemntId",
+  "/view/:announcementId",
   isUserAuthorized,
   doesAnnouncementExist,
   announcementController.viewSingleAnnouncement
