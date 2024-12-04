@@ -50,7 +50,7 @@ const getSingleServiceById = async (req, res) => {
 const updateService = async (req, res) => {
   try {
     const serviceData = req.body;
-    const service = await serviceRepository.createService(
+    const service = await serviceRepository.updateService(
       req.serviceId,
       serviceData
     );
@@ -70,6 +70,7 @@ const updateService = async (req, res) => {
 const deleteService = async (req, res) => {
   try {
     const { serviceId } = req.params;
+    console.log(serviceId);
     await serviceRepository.deleteService(serviceId);
     return res.status(httpStatus.CREATED).json({
       status: httpStatus.CREATED,

@@ -1,8 +1,9 @@
 import express from "express";
 import { isUserAuthorized } from "../middlewares/authorizationMiddleware.js";
-import { newServiceSchema } from "../modules/service/validation/serviceValidation.js";
+import { newServiceSchema, updateServiceSchema } from "../modules/service/validation/serviceValidation.js";
 import { bodyValidation } from "../middlewares/validationMiddleware.js";
 import {
+    isOtherSameService,
   isSameService,
   isServiceExistById,
   isServicesExist,
@@ -33,8 +34,9 @@ serviceRoute.get(
 serviceRoute.put(
     "/update/:serviceId",
     isUserAuthorized,
+    bodyValidation(updateServiceSchema),
     isServiceExistById,
-    isSameService,
+    isOtherSameService,
     serviceController.updateService
   );
   serviceRoute.delete(

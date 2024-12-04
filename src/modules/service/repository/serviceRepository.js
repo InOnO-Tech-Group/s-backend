@@ -24,7 +24,7 @@ const findSameService = async (id, name) => {
     });
   };
   const deleteService = async (id)=>{
-    return await Service.findByIdAndUpdate(id);
+    return await Service.findByIdAndDelete(id);
   }
 
 export default {
