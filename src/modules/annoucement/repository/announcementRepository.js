@@ -29,7 +29,7 @@ const updateAnnouncement = async (id, anncouncementData) => {
   });
 };
 
-const deleteAnnouncement = async (id, anncouncementData) => {
+const deleteAnnouncement = async (id) => {
   return await Anncouncemnt.findByIdAndDelete(id);
 };
 
