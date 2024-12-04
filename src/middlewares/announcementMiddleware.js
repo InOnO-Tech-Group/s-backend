@@ -60,7 +60,6 @@ export const doAnyAnnouncementsExist = async (req, res, next) => {
         message: "Announcements not Found!",
       });
   }
-  console.log(announcements);
   req.announcements = announcements;
   return next();
 };

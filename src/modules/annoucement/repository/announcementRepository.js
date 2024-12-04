@@ -40,7 +40,7 @@ const findDueAnnouncement = async (now) => {
 const updateDueAnnouncementStatus = async (announcentIds) => {
   return Anncouncemnt.updateMany(
     { _id: { $in: announcentIds } },
-    { $set: { status: "unPublished" } }
+    { $set: { status: "unpublished" } }
   );
 };
 export default {

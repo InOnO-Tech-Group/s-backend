@@ -22,9 +22,14 @@ export const scheduleUpdateAnnouncementDues = () => {
         if (userInfo.email) {
           await sendEmail(
             userInfo.email,
-            "ES Gishoma Announcement Dues",
-            `<p> ${announcementIds.length} Announcements Updated to unPublished.
-                    Please visit school website dashboard.
+            "Announcement Updated - ES Gishoma",
+            `<p>Hello, <br> 
+            ${announcementIds.length} Announcements were unpublished automatically due to, 
+            their due dates have reached.
+            <br>
+                    <a href=${process.env.FRONTEND_URL}>
+                    Click here to view more details
+                    </a>
                 </p>`,
             "Consider The Info. Check For More"
           );
