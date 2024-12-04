@@ -47,4 +47,45 @@ const getSingleServiceById = async (req, res) => {
     });
   }
 };
-export default { createNewService, getAllServices, getSingleServiceById };
+const updateService = async (req, res) => {
+  try {
+    const serviceData = req.body;
+    const service = await serviceRepository.createService(
+      req.serviceId,
+      serviceData
+    );
+
+    return res.status(httpStatus.CREATED).json({
+      status: httpStatus.CREATED,
+      message: "Service Updated  successfully.",
+      data: service,
+    });
+  } catch (error) {
+    return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+      status: httpStatus.INTERNAL_SERVER_ERROR,
+      message: error.message,
+    });
+  }
+};
+const deleteService = async (req, res) => {
+  try {
+    const { serviceId } = req.params;
+    await serviceRepository.deleteService(serviceId);
+    return res.status(httpStatus.CREATED).json({
+      status: httpStatus.CREATED,
+      message: "Service deleted  successfully.",
+    });
+  } catch (error) {
+    return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+      status: httpStatus.INTERNAL_SERVER_ERROR,
+      message: error.message,
+    });
+  }
+};
+export default {
+  createNewService,
+  getAllServices,
+  getSingleServiceById,
+  updateService,
+  deleteService,
+};
