@@ -25,14 +25,15 @@ const blogSchema = new mongoose.Schema(
       ref: "users",
       required: true
     },
-    password: {
+    status: {
       type: String,
       required: true,
+      default: "published"
     },
   },
   { timestamps: true }
 );
 
-const blog = mongoose.model("blogs", blogSchema);
+const Blog = mongoose.model("blogs", blogSchema);
 
-export default blog;
+export default Blog;
