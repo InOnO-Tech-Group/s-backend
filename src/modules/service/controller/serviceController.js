@@ -21,8 +21,8 @@ const createNewService = async (req, res) => {
 };
 const getAllServices = async (req, res) => {
   try {
-    return res.status(httpStatus.CREATED).json({
-      status: httpStatus.CREATED,
+    return res.status(httpStatus.OK).json({
+      status: httpStatus.OK,
       message: "Services Retrieved  successfully.",
       data: req.services,
     });
@@ -55,8 +55,8 @@ const updateService = async (req, res) => {
       serviceData
     );
 
-    return res.status(httpStatus.CREATED).json({
-      status: httpStatus.CREATED,
+    return res.status(httpStatus.OK).json({
+      status: httpStatus.OK,
       message: "Service Updated  successfully.",
       data: service,
     });
@@ -70,10 +70,9 @@ const updateService = async (req, res) => {
 const deleteService = async (req, res) => {
   try {
     const { serviceId } = req.params;
-    console.log(serviceId);
     await serviceRepository.deleteService(serviceId);
-    return res.status(httpStatus.CREATED).json({
-      status: httpStatus.CREATED,
+    return res.status(httpStatus.OK).json({
+      status: httpStatus.OK,
       message: "Service deleted  successfully.",
     });
   } catch (error) {

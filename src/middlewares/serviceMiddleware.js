@@ -3,13 +3,13 @@ import httpStatus from "http-status";
 
 export const isSameService = async (req, res, next) => {
   try {
-    const { serviceName } = req.body;
-    const service = await serviceRepository.findServiceByName(serviceName);
+    const { name } = req.body;
+    const service = await serviceRepository.findServiceByName(name);
     if (service) {
       return res.status(httpStatus.BAD_REQUEST).json({
         status: httpStatus.BAD_REQUEST,
         message:
-          "Service already exists, Try editing description if is the case!",
+          "Service already exists!",
       });
     }
 
@@ -62,7 +62,7 @@ export const isOtherSameService = async (req, res, next) => {
   const { serviceId } = req.params;
   const { name } = req.body;
   try {
-    const service = await serviceRepository.findSameService(serviceId,name);
+    const service = await serviceRepository.findSameService(serviceId, name);
     if (service) {
       return res.status(httpStatus.BAD_REQUEST).json({
         status: httpStatus.BAD_REQUEST,
