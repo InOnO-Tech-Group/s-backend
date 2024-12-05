@@ -8,7 +8,12 @@ const saveBlog = async (data) => {
     return await Blog.create(data);
 }
 
+const findAllBlogs = async () => {
+    return await Blog.find()
+}
+
 export default {
     findBlogByAttribute,
-    saveBlog
+    saveBlog,
+    findAllBlogs
 }

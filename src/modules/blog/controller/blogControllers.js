@@ -19,6 +19,23 @@ const publishBlog = async (req, res) => {
     }
 }
 
+const viewAllBlogs = async (req, res) => {
+    try {
+        const blogs = await blogRepository.findAllBlogs()
+        return res.status(httpStatus.OK).json({
+            status: httpStatus.OK,
+            message: "All blogs fetched successfully",
+            blogs,
+        })
+    } catch (error) {
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+            status: httpStatus.INTERNAL_SERVER_ERROR,
+            message: error.message,
+        })
+    }
+}
+
 export default {
-    publishBlog
+    publishBlog,
+    viewAllBlogs
 }
