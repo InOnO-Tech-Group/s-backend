@@ -1,4 +1,5 @@
 import httpStatus from "http-status";
+import userRepository from "../repository/userRepository.js";
 
 const viewUserProfile = async (req, res) => {
   try {
@@ -15,4 +16,20 @@ const viewUserProfile = async (req, res) => {
     });
   }
 };
-export default {viewUserProfile}
+const updateUserProfile = async (req, res) => {
+    try {
+     const userData = req.body
+     const user = await userRepository.updateUserProfile(req.user._id,userData)
+      return res.status(httpStatus.CREATED).json({
+        status: httpStatus.CREATED,
+        message: "User profile updated successFully.",
+        data: user,
+      });
+    } catch (error) {
+      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+        status: httpStatus.INTERNAL_SERVER_ERROR,
+        message: error.message,
+      });
+    }
+  };
+export default {viewUserProfile,updateUserProfile}
