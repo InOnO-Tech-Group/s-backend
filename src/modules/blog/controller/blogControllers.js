@@ -34,8 +34,25 @@ const viewAllBlogs = async (req, res) => {
         })
     }
 }
+const updateBlog = async (req, res) => {
+    try {
+        const {blogId}=req.params
+        const blog = await blogRepository.updateBlog(blogId,req.body)
+        return res.status(httpStatus.OK).json({
+            status: httpStatus.OK,
+            message: "Blog updated successfully",
+            blog,
+        })
+    } catch (error) {
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+            status: httpStatus.INTERNAL_SERVER_ERROR,
+            message: error.message,
+        })
+    }
+}
 
 export default {
     publishBlog,
-    viewAllBlogs
+    viewAllBlogs,
+    updateBlog
 }

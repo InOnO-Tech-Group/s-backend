@@ -18,3 +18,21 @@ export const isBlogAlreadyExists = async (req, res, next) => {
         });
     }
 }
+export const isBlogExistById = async (req, res, next) => {
+    try {
+        const {BlogId} = req.params
+        const blog = await blogRepository.findBlogById(BlogId);
+        if (!blog) {
+            return res.status(httpStatus.BAD_REQUEST).json({
+                status: httpStatus.BAD_REQUEST,
+                message: "Blog not found!"
+            });
+        }
+        return next()
+    } catch (error) {
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+            status: httpStatus.INTERNAL_SERVER_ERROR,
+            message: error.message
+        });
+    }
+}
