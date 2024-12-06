@@ -8,6 +8,7 @@ import { isMessageExistById, isMessagesExist } from '../middlewares/messageMiddl
 const messageRoute = express.Router();
 messageRoute.post("/new",bodyValidation(newMessageSchema),messageController.createNewMessage)
 messageRoute.get("/view",isUserAuthorized,isMessagesExist,messageController.viewAllMessages)
+messageRoute.get("/view/:messageId",isUserAuthorized,isMessageExistById,messageController.viewSingleMessage)
 messageRoute.put("/mark/:messageId",isUserAuthorized,isMessageExistById,messageController.markReadMessage)
 messageRoute.delete("/delete/:messageId",isUserAuthorized,isMessageExistById,messageController.deleteMessage)
 
