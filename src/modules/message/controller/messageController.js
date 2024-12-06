@@ -33,4 +33,34 @@ const viewAllMessages = async (req, res) => {
       });
     }
   };
-export default { createNewMessage,viewAllMessages };
+  const markReadMessage = async (req, res) => {
+    try {
+        const message = await messageRepository.updateMessage(req.message._id)
+      return res.status(httpStatus.OK).json({
+        status: httpStatus.OK,
+        message: "Message marked read successfully.",
+        data: message,
+      });
+    } catch (error) {
+      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+        status: httpStatus.INTERNAL_SERVER_ERROR,
+        message: error.message,
+      });
+    }
+  };
+  const deleteMessage = async (req, res) => {
+    try {
+        await messageRepository.deleteMessage(req.message._id)
+      return res.status(httpStatus.OK).json({
+        status: httpStatus.OK,
+        message: "Message deleted successfully!",
+        data: req.messages,
+      });
+    } catch (error) {
+      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+        status: httpStatus.INTERNAL_SERVER_ERROR,
+        message: error.message,
+      });
+    }
+  };
+export default { createNewMessage,viewAllMessages,markReadMessage,deleteMessage };
