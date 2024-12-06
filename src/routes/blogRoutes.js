@@ -12,4 +12,5 @@ const blogsRoutes = express.Router()
 blogsRoutes.post("/new", isUserAuthorized, bodyValidation(newBlogSchema), isBlogAlreadyExists, blogControllers.publishBlog)
 blogsRoutes.put("/update/:blogId", isUserAuthorized, bodyValidation(updateBlogSchema), isBlogExistById, blogControllers.updateBlog)
 blogsRoutes.get("/view-all-blogs", isUserAuthorized, blogControllers.viewAllBlogs);
+blogsRoutes.get("/view/:blogId", isUserAuthorized, isBlogExistById,blogControllers.viewSingleBlog);
 export default blogsRoutes

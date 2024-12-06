@@ -20,14 +20,15 @@ export const isBlogAlreadyExists = async (req, res, next) => {
 }
 export const isBlogExistById = async (req, res, next) => {
     try {
-        const {BlogId} = req.params
-        const blog = await blogRepository.findBlogById(BlogId);
+        const {blogId} = req.params
+        const blog = await blogRepository.findBlogById(blogId);
         if (!blog) {
             return res.status(httpStatus.BAD_REQUEST).json({
                 status: httpStatus.BAD_REQUEST,
                 message: "Blog not found!"
             });
         }
+        req.blog = blog
         return next()
     } catch (error) {
         res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
