@@ -54,7 +54,7 @@ const viewSingleBlog = async (req, res) => {
   try {
     return res.status(httpStatus.OK).json({
       status: httpStatus.OK,
-      message: "Blog Retrieved successfully",
+      message: "Blog retrieved successfully",
       data: req.blog,
     });
   } catch (error) {
@@ -64,9 +64,24 @@ const viewSingleBlog = async (req, res) => {
     });
   }
 };
+const viewPublishedBlog = async (req, res) => {
+    try {
+      return res.status(httpStatus.OK).json({
+        status: httpStatus.OK,
+        message: "Blogs retrieved successfully",
+        data: req.blogs,
+      });
+    } catch (error) {
+      res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+        status: httpStatus.INTERNAL_SERVER_ERROR,
+        message: error.message,
+      });
+    }
+  };
 export default {
   publishBlog,
   viewAllBlogs,
   updateBlog,
-  viewSingleBlog
+  viewSingleBlog,
+  viewPublishedBlog
 };

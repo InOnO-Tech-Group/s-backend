@@ -9,11 +9,15 @@ const saveBlog = async (data) => {
 };
 
 const findAllBlogs = async () => {
-  return await Blog.find();
+  return await Blog.find().populate("service").populate("author");
 };
 const findBlogById = async (id) => {
-  return await Blog.findById(id);
+  return await Blog.findById(id).populate("service").populate("author");
 };
+
+const findPublishedBlogs = async () => {
+    return await Blog.find({status:"published"}).populate("service").populate("author");
+  };
 
 const updateBlog = async (id, blogData) => {
     return await Blog.findByIdAndUpdate(id, blogData, {
@@ -25,5 +29,6 @@ export default {
   saveBlog,
   findAllBlogs,
   findBlogById,
-  updateBlog
+  updateBlog,
+  findPublishedBlogs
 };
