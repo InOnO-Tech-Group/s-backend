@@ -78,10 +78,26 @@ const viewPublishedBlog = async (req, res) => {
       });
     }
   };
+  const deleteBlog = async (req, res) => {
+    try {
+        await blogRepository.deleteBlog(req.blog._id)
+      return res.status(httpStatus.OK).json({
+        status: httpStatus.OK,
+        message: "Blog deleted successfully !",
+        data: req.blogs,
+      });
+    } catch (error) {
+      res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+        status: httpStatus.INTERNAL_SERVER_ERROR,
+        message: error.message,
+      });
+    }
+  };
 export default {
   publishBlog,
   viewAllBlogs,
   updateBlog,
   viewSingleBlog,
-  viewPublishedBlog
+  viewPublishedBlog,
+  deleteBlog
 };

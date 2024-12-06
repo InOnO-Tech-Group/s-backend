@@ -16,19 +16,25 @@ const findBlogById = async (id) => {
 };
 
 const findPublishedBlogs = async () => {
-    return await Blog.find({status:"published"}).populate("service").populate("author");
-  };
+  return await Blog.find({ status: "published" })
+    .populate("service")
+    .populate("author");
+};
 
 const updateBlog = async (id, blogData) => {
-    return await Blog.findByIdAndUpdate(id, blogData, {
-      new: true,
-    });
-  };
+  return await Blog.findByIdAndUpdate(id, blogData, {
+    new: true,
+  });
+};
+const deleteBlog = async (id) => {
+  return await Blog.findByIdAndDelete(id);
+};
 export default {
   findBlogByAttribute,
   saveBlog,
   findAllBlogs,
   findBlogById,
   updateBlog,
-  findPublishedBlogs
+  findPublishedBlogs,
+  deleteBlog
 };

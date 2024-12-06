@@ -14,4 +14,5 @@ blogsRoutes.put("/update/:blogId", isUserAuthorized, bodyValidation(updateBlogSc
 blogsRoutes.get("/view-all-blogs", isUserAuthorized, blogControllers.viewAllBlogs);
 blogsRoutes.get("/view-published-blogs", isAnyPublishedBlog,blogControllers.viewPublishedBlog);
 blogsRoutes.get("/view/:blogId", isUserAuthorized, isBlogExistById,blogControllers.viewSingleBlog);
+blogsRoutes.delete("/delete/:blogId", isUserAuthorized, isBlogExistById,blogControllers.deleteBlog);
 export default blogsRoutes
