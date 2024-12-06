@@ -1,5 +1,5 @@
 import Blog from "../../../database/models/blog.js";
-
+import BlogView from "../../../database/models/blogViews.js";
 const findBlogByAttribute = async (key, value) => {
   return await Blog.findOne({ [key]: value });
 };
@@ -26,8 +26,21 @@ const updateBlog = async (id, blogData) => {
     new: true,
   });
 };
+const updateBlogViews = async (id) => {
+  return await Blog.findByIdAndUpdate(
+    id,
+    { $inc: { views: 1 } },
+    {
+      new: true,
+    }
+  );
+};
 const deleteBlog = async (id) => {
   return await Blog.findByIdAndDelete(id);
+};
+
+const recordView = async (data) => {
+  return await BlogView.create(data);
 };
 export default {
   findBlogByAttribute,
@@ -36,5 +49,7 @@ export default {
   findBlogById,
   updateBlog,
   findPublishedBlogs,
-  deleteBlog
+  deleteBlog,
+  recordView,
+  updateBlogViews,
 };

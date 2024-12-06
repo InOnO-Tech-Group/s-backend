@@ -23,12 +23,17 @@ const blogSchema = new mongoose.Schema(
     author: {
       type: ObjectId,
       ref: "users",
-      required: true
+      required: true,
+    },
+    views: {
+      type: Number,
+      required: true,
+      default: 0,
     },
     status: {
       type: String,
       required: true,
-      default: "published"
+      default: "published",
     },
   },
   { timestamps: true }

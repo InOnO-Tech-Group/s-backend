@@ -52,10 +52,12 @@ const updateBlog = async (req, res) => {
 
 const viewSingleBlog = async (req, res) => {
   try {
+    await blogRepository.recordView({blog:req.blog._id})
+    const blog =await blogRepository.updateBlogViews(req.blog._id)
     return res.status(httpStatus.OK).json({
       status: httpStatus.OK,
       message: "Blog retrieved successfully",
-      data: req.blog,
+      data: blog,
     });
   } catch (error) {
     res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
