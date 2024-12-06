@@ -9,7 +9,10 @@ const saveBlog = async (data) => {
 };
 
 const findAllBlogs = async () => {
-  return await Blog.find().populate("service").populate("author");
+  return await Blog.find()
+    .populate("service")
+    .populate("author")
+    .sort({ createdAt: -1 });
 };
 const findBlogById = async (id) => {
   return await Blog.findById(id).populate("service").populate("author");
@@ -18,7 +21,8 @@ const findBlogById = async (id) => {
 const findPublishedBlogs = async () => {
   return await Blog.find({ status: "published" })
     .populate("service")
-    .populate("author");
+    .populate("author")
+    .sort({ createdAt: -1 });
 };
 
 const updateBlog = async (id, blogData) => {
@@ -54,8 +58,8 @@ const getBlogReadStatistics = async (year) => {
     },
     {
       $group: {
-        _id: { month: { $month: "$createdAt" }, },
-        totalViews: { $sum: 1 }
+        _id: { month: { $month: "$createdAt" } },
+        totalViews: { $sum: 1 },
       },
     },
     { $sort: { "_id.month": 1 } },
