@@ -19,4 +19,18 @@ const createNewMessage = async (req, res) => {
     });
   }
 };
-export default { createNewMessage };
+const viewAllMessages = async (req, res) => {
+    try {
+      return res.status(httpStatus.OK).json({
+        status: httpStatus.OK,
+        message: "Messages retrieved successfully.",
+        data: req.messages,
+      });
+    } catch (error) {
+      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+        status: httpStatus.INTERNAL_SERVER_ERROR,
+        message: error.message,
+      });
+    }
+  };
+export default { createNewMessage,viewAllMessages };
