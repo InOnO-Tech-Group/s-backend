@@ -15,4 +15,5 @@ blogsRoutes.get("/view-all-blogs", isUserAuthorized, blogControllers.viewAllBlog
 blogsRoutes.get("/view-published-blogs", isAnyPublishedBlog,blogControllers.viewPublishedBlog);
 blogsRoutes.get("/view/:blogId", isUserAuthorized, isBlogExistById,blogControllers.viewSingleBlog);
 blogsRoutes.delete("/delete/:blogId", isUserAuthorized, isBlogExistById,blogControllers.deleteBlog);
+blogsRoutes.get("/view-statistics/:year", isUserAuthorized,blogControllers.getBlogannualStatistics);
 export default blogsRoutes

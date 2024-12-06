@@ -86,7 +86,21 @@ const viewPublishedBlog = async (req, res) => {
       return res.status(httpStatus.OK).json({
         status: httpStatus.OK,
         message: "Blog deleted successfully !",
-        data: req.blogs,
+      });
+    } catch (error) {
+      res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+        status: httpStatus.INTERNAL_SERVER_ERROR,
+        message: error.message,
+      });
+    }
+  };
+  const getBlogannualStatistics = async (req, res) => {
+    try {
+        const statistics = await blogRepository.getBlogReadStatistics(req.params.year)
+      return res.status(httpStatus.OK).json({
+        status: httpStatus.OK,
+        message: "Statistics retrived successfully !",
+        data: statistics,
       });
     } catch (error) {
       res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
@@ -101,5 +115,6 @@ export default {
   updateBlog,
   viewSingleBlog,
   viewPublishedBlog,
-  deleteBlog
+  deleteBlog,
+  getBlogannualStatistics
 };

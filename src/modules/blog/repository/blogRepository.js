@@ -42,6 +42,25 @@ const deleteBlog = async (id) => {
 const recordView = async (data) => {
   return await BlogView.create(data);
 };
+const getBlogReadStatistics = async (year) => {
+  const start = new Date(`${year}-01-01`);
+  const end = new Date(`${year}-12-31T23:59:59`);
+
+  return BlogView.aggregate([
+    {
+      $match: {
+        createdAt: { $gte: start, $lte: end },
+      },
+    },
+    {
+      $group: {
+        _id: { month: { $month: "$createdAt" }, },
+        totalViews: { $sum: 1 }
+      },
+    },
+    { $sort: { "_id.month": 1 } },
+  ]);
+};
 export default {
   findBlogByAttribute,
   saveBlog,
@@ -52,4 +71,5 @@ export default {
   deleteBlog,
   recordView,
   updateBlogViews,
+  getBlogReadStatistics,
 };
