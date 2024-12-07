@@ -11,4 +11,5 @@ export const updateBlogSchema = Joi.object({
     service: Joi.string(),
     coverImage: Joi.string(),
     description: Joi.string(),
+    status: Joi.string()
 })

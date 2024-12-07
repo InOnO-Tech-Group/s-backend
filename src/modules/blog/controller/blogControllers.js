@@ -52,8 +52,8 @@ const updateBlog = async (req, res) => {
 
 const viewSingleBlog = async (req, res) => {
   try {
-    await blogRepository.recordView({blog:req.blog._id})
-    const blog =await blogRepository.updateBlogViews(req.blog._id)
+    await blogRepository.recordView({ blog: req.blog._id })
+    const blog = await blogRepository.updateBlogViews(req.blog._id)
     return res.status(httpStatus.OK).json({
       status: httpStatus.OK,
       message: "Blog retrieved successfully",
@@ -67,48 +67,48 @@ const viewSingleBlog = async (req, res) => {
   }
 };
 const viewPublishedBlog = async (req, res) => {
-    try {
-      return res.status(httpStatus.OK).json({
-        status: httpStatus.OK,
-        message: "Blogs retrieved successfully",
-        data: req.blogs,
-      });
-    } catch (error) {
-      res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-        status: httpStatus.INTERNAL_SERVER_ERROR,
-        message: error.message,
-      });
-    }
-  };
-  const deleteBlog = async (req, res) => {
-    try {
-        await blogRepository.deleteBlog(req.blog._id)
-      return res.status(httpStatus.OK).json({
-        status: httpStatus.OK,
-        message: "Blog deleted successfully !",
-      });
-    } catch (error) {
-      res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-        status: httpStatus.INTERNAL_SERVER_ERROR,
-        message: error.message,
-      });
-    }
-  };
-  const getBlogannualStatistics = async (req, res) => {
-    try {
-        const statistics = await blogRepository.getBlogReadStatistics(req.params.year)
-      return res.status(httpStatus.OK).json({
-        status: httpStatus.OK,
-        message: "Statistics retrived successfully !",
-        data: statistics,
-      });
-    } catch (error) {
-      res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-        status: httpStatus.INTERNAL_SERVER_ERROR,
-        message: error.message,
-      });
-    }
-  };
+  try {
+    return res.status(httpStatus.OK).json({
+      status: httpStatus.OK,
+      message: "Blogs retrieved successfully",
+      data: req.blogs,
+    });
+  } catch (error) {
+    res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+      status: httpStatus.INTERNAL_SERVER_ERROR,
+      message: error.message,
+    });
+  }
+};
+const deleteBlog = async (req, res) => {
+  try {
+    await blogRepository.deleteBlog(req.blog._id)
+    return res.status(httpStatus.OK).json({
+      status: httpStatus.OK,
+      message: "Blog deleted successfully !",
+    });
+  } catch (error) {
+    res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+      status: httpStatus.INTERNAL_SERVER_ERROR,
+      message: error.message,
+    });
+  }
+};
+const getBlogannualStatistics = async (req, res) => {
+  try {
+    const statistics = await blogRepository.getBlogReadStatistics(req.params.year)
+    return res.status(httpStatus.OK).json({
+      status: httpStatus.OK,
+      message: "Statistics retrived successfully !",
+      data: statistics,
+    });
+  } catch (error) {
+    res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+      status: httpStatus.INTERNAL_SERVER_ERROR,
+      message: error.message,
+    });
+  }
+};
 export default {
   publishBlog,
   viewAllBlogs,
