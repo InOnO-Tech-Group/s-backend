@@ -1,3 +1,4 @@
+import { sendEmail } from "../../../services/sendEmail.js";
 import messageRepository from "../repository/messageRepository.js";
 import httpStatus from "http-status";
 
@@ -6,6 +7,10 @@ const createNewMessage = async (req, res) => {
     const messageData = req.body;
 
     const message = await messageRepository.createMessage(messageData);
+    const username = req.body.names.split(' ')[0];
+    await sendEmail(req.body.email, 'Thanks for your message', `
+    
+    Thanks for your message, we will reach out to you soon!`, 'Message received successfully', username);
 
     return res.status(httpStatus.CREATED).json({
       status: httpStatus.CREATED,
@@ -19,6 +24,7 @@ const createNewMessage = async (req, res) => {
     });
   }
 };
+
 const viewAllMessages = async (req, res) => {
   try {
     return res.status(httpStatus.OK).json({
