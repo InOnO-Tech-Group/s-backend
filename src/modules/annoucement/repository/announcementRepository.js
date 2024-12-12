@@ -16,9 +16,8 @@ const findAllAnnouncements = async () => {
   return await Anncouncemnt.find();
 };
 
-const findActiveAnnouncements = async (date) => {
+const findActiveAnnouncements = async () => {
   return await Anncouncemnt.find({
-    dueDate: { $lt: date },
     status: "published",
   });
 };
