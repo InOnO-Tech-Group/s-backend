@@ -21,7 +21,6 @@ serviceRoute.post(
 );
 serviceRoute.get(
   "/view",
-  isUserAuthorized,
   isServicesExist,
   serviceController.getAllServices
 );

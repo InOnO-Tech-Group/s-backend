@@ -1,5 +1,6 @@
 import httpStatus from "http-status";
 import blogRepository from "../repository/blogRepository.js";
+import mongoose, { Mongoose } from "mongoose";
 
 const publishBlog = async (req, res) => {
   try {
@@ -94,6 +95,7 @@ const deleteBlog = async (req, res) => {
     });
   }
 };
+
 const getBlogannualStatistics = async (req, res) => {
   try {
     const statistics = await blogRepository.getBlogReadStatistics(req.params.year)
@@ -109,6 +111,26 @@ const getBlogannualStatistics = async (req, res) => {
     });
   }
 };
+
+const getBlogsByService = async (req, res) => {
+  try {
+    const serviceId = req.service._id
+    const blogs = await blogRepository.findPublishedBlogsByAttribute("service", serviceId);
+    return res.status(httpStatus.OK).json({
+      status: httpStatus.OK,
+      message: "Services blogs retrieved successfully",
+      service: req.service,
+      blogs
+    })
+  } catch (error) {
+    console.log(error.message)
+    res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+      status: httpStatus.INTERNAL_SERVER_ERROR,
+      message: error.message
+    })
+  }
+}
+
 export default {
   publishBlog,
   viewAllBlogs,
@@ -116,5 +138,6 @@ export default {
   viewSingleBlog,
   viewPublishedBlog,
   deleteBlog,
-  getBlogannualStatistics
+  getBlogannualStatistics,
+  getBlogsByService
 };

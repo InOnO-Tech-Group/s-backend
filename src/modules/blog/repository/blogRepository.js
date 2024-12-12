@@ -1,7 +1,12 @@
 import Blog from "../../../database/models/blog.js";
 import BlogView from "../../../database/models/blogViews.js";
+
 const findBlogByAttribute = async (key, value) => {
   return await Blog.findOne({ [key]: value });
+};
+
+const findPublishedBlogsByAttribute = async (key, value) => {
+  return await Blog.find({ [key]: value, status: 'published' }).sort({ createdAt: -1 })
 };
 
 const saveBlog = async (data) => {
@@ -76,4 +81,5 @@ export default {
   recordView,
   updateBlogViews,
   getBlogReadStatistics,
+  findPublishedBlogsByAttribute
 };

@@ -66,6 +66,7 @@ export const doAnyAnnouncementsExist = async (req, res, next) => {
 
 export const doAnyActiveAnnouncementExist = async (req, res, next) => {
   const announcements = await announcementRepository.findActiveAnnouncements();
+  console.log(announcements)
   if (!announcements || announcements.length < 1) {
     return res
       .status(httpStatus.NOT_FOUND)
