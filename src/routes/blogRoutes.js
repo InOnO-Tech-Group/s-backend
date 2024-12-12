@@ -14,7 +14,7 @@ blogsRoutes.post("/new", isUserAuthorized, bodyValidation(newBlogSchema), isBlog
 blogsRoutes.put("/update/:blogId", isUserAuthorized, bodyValidation(updateBlogSchema), isBlogExistById, blogControllers.updateBlog)
 blogsRoutes.get("/view-all-blogs", isUserAuthorized, blogControllers.viewAllBlogs);
 blogsRoutes.get("/view-published-blogs", isAnyPublishedBlog, blogControllers.viewPublishedBlog);
-blogsRoutes.get("/view/:blogId", isUserAuthorized, isBlogExistById, blogControllers.viewSingleBlog);
+blogsRoutes.get("/view/:blogId", isBlogExistById, blogControllers.viewSingleBlog);
 blogsRoutes.delete("/delete/:blogId", isUserAuthorized, isBlogExistById, blogControllers.deleteBlog);
 blogsRoutes.get("/view-statistics/:year", isUserAuthorized, blogControllers.getBlogannualStatistics);
 blogsRoutes.get("/view-by-service/:serviceId", isServiceExistById, blogControllers.getBlogsByService)
