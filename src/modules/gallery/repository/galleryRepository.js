@@ -6,4 +6,7 @@ const createGallery = (galleryData)=>{
 const findGallery = () => {
     return Gallery.find().sort({ createdAt: -1 }); // -1 indicates descending order
   };
-export default {createGallery,findGallery}
+  const findGalleryById =(id)=>{
+    return Gallery.findById(id)
+  }
+export default {createGallery,findGallery,findGalleryById}

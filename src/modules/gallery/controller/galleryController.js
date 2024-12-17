@@ -34,5 +34,21 @@ const findAllGallery = async (req, res) => {
     }
   };
   
+  const findSingleGallery = async (req, res) => {
+    try {
+      
+      return res.status(httpStatus.OK).json({
+        status: httpStatus.OK,
+        message: "Gallery retrieved successfully!",
+        data: req.gallery,
+      });
+    } catch (error) {
+      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+        status: httpStatus.INTERNAL_SERVER_ERROR,
+        message: error.message,
+      });
+    }
+  };
+  
 
-export default {createNewGallery,findAllGallery}
+export default {createNewGallery,findAllGallery,findSingleGallery}
