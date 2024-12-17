@@ -71,7 +71,7 @@ const getBlogReadStatistics = async (year) => {
   ]);
 };
 export default {
-  findBlogByAttribute,
+  findBlogByAttribute,  
   saveBlog,
   findAllBlogs,
   findBlogById,

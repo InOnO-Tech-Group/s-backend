@@ -13,13 +13,13 @@ const findAnnouncementById = async (announcementId) => {
 };
 
 const findAllAnnouncements = async () => {
-  return await Anncouncemnt.find();
+  return await Anncouncemnt.find().sort({ createdAt: -1 })
 };
 
 const findActiveAnnouncements = async () => {
   return await Anncouncemnt.find({
     status: "published",
-  });
+  }).sort({ createdAt: -1 })
 };
 
 const updateAnnouncement = async (id, anncouncementData) => {
