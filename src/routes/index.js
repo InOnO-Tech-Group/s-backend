@@ -15,6 +15,6 @@ router.use("/announcement", announcementRoute);
 router.use("/service", serviceRoute);
 router.use("/blog", blogsRoutes)
 router.use("/message",messageRoute)
-router.use("gallery",galleryRoute)
+router.use("/gallery",galleryRoute)
 
 export default router;
