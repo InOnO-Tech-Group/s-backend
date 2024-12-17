@@ -1,4 +1,5 @@
 import galleryRepository from "../modules/gallery/repository/galleryRepository.js";
+import httpStatus from "http-status"
 
 export const isGalleryExist = async (req, res, next) => {
     try {

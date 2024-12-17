@@ -7,6 +7,6 @@ import { isGalleryExist, isGalleryExistById } from "../middlewares/galleryMiddle
 const galleryRoute = express.Router()
 galleryRoute.post("/new",isUserAuthorized,bodyValidation(newGallerySchema),galleryController.createNewGallery)
 galleryRoute.get("/view",isGalleryExist,galleryController.findAllGallery)
-galleryRoute.delete("/view/:galleryId",isGalleryExistById,galleryController.findSingleGallery)
-
+galleryRoute.get("/view/:galleryId",isGalleryExistById,galleryController.findSingleGallery)
+galleryRoute.delete("/delete/:galleryId",isGalleryExistById,galleryController.deleteGallery)
 export default galleryRoute
