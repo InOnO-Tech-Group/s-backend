@@ -12,11 +12,11 @@ const seedUsers = async () => {
             password: await hashPassword("password123"),
         },
         {
-            firstName: "Jane",
-            lastName: "Doe",
-            username: "jane1",
-            email: "jane@example.com",
-            phone: "0788888888",
+            firstName: "Mwitaba",
+            lastName: "Anaclet",
+            username: "mwitabaanaclet",
+            email: "mwitabaanaclet@gmail.com",
+            phone: "0788458307",
             password: await hashPassword("password123"),
         },
         {
